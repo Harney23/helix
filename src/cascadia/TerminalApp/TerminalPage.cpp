@@ -2994,6 +2994,15 @@ namespace winrt::TerminalApp::implementation
 
         const auto content = _manager.CreateCore(settings.DefaultSettings(), settings.UnfocusedSettings(), connection);
         const TermControl control{ content };
+
+        if (const auto id = settings.DefaultSettings().SessionId(); id != winrt::guid{})
+        {
+            const auto settingsDir = CascadiaSettings::SettingsDirectory();
+            const auto idStr = Utils::GuidToPlainString(id);
+            const auto path = fmt::format(FMT_COMPILE(L"{}\\buffer_{}.txt"), settingsDir, idStr);
+            control.RestoreFromPath(path);
+        }
+
         return _SetupControl(control);
     }
 
@@ -3093,10 +3102,7 @@ namespace winrt::TerminalApp::implementation
             return nullptr;
         }
 
-        const auto sessionId = controlSettings.DefaultSettings().SessionId();
-        const auto hasSessionId = sessionId != winrt::guid{};
-
-        auto connection = existingConnection ? existingConnection : _CreateConnectionFromSettings(profile, controlSettings.DefaultSettings(), hasSessionId);
+        auto connection = existingConnection ? existingConnection : _CreateConnectionFromSettings(profile, controlSettings.DefaultSettings(), false);
         if (existingConnection)
         {
             connection.Resize(controlSettings.DefaultSettings().InitialRows(), controlSettings.DefaultSettings().InitialCols());
@@ -3117,14 +3123,6 @@ namespace winrt::TerminalApp::implementation
         }
 
         const auto control = _CreateNewControlAndContent(controlSettings, connection);
-
-        if (hasSessionId)
-        {
-            const auto settingsDir = CascadiaSettings::SettingsDirectory();
-            const auto idStr = Utils::GuidToPlainString(sessionId);
-            const auto path = fmt::format(FMT_COMPILE(L"{}\\buffer_{}.txt"), settingsDir, idStr);
-            control.RestoreFromPath(path);
-        }
 
         auto paneContent{ winrt::make<TerminalPaneContent>(profile, _terminalSettingsCache, control) };
 
@@ -3812,7 +3810,7 @@ namespace winrt::TerminalApp::implementation
             // recipe for disaster. We won't ever open up a tab in this window.
             newTerminalArgs.Elevate(false);
             const auto newPane = _MakePane(newTerminalArgs, nullptr, connection);
-            newPane->WalkTree([](const auto& pane) {
+            newPane->WalkTree([](auto pane) {
                 pane->FinalizeConfigurationGivenDefault();
             });
             _CreateNewTabFromPane(newPane);

@@ -739,7 +739,7 @@ namespace winrt::TerminalApp::implementation
             }
 
             // Clean read-only mode to prevent additional prompt if closing the pane triggers closing of a hosting tab
-            pane->WalkTree([](const auto& p) {
+            pane->WalkTree([](auto p) {
                 if (const auto control{ p->GetTerminalControl() })
                 {
                     if (control.ReadOnly())
