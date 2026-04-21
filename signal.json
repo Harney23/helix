@@ -1,0 +1,12 @@
+{
+  "test_validation_mode": "subset",
+  "validation_test_files": [
+    "src/host/ut_host/UtilsTests.cpp",
+    "src/host/ut_host/TitleTests.cpp",
+    "src/host/ut_host/ViewportTests.cpp",
+    "src/host/ut_host/AliasTests.cpp",
+    "src/host/ut_host/HistoryTests.cpp"
+  ],
+  "validation_test_file_count": 5,
+  "validation_tests_executed": null
+}
