@@ -63,4 +63,3 @@ private:
     ptrdiff_t _index = 0;
     ptrdiff_t _step = 0;
 };
-// HELIX_MARKER_regex_search_v1
