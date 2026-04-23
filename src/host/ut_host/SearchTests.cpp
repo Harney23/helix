@@ -204,3 +204,4 @@ class SearchTests
         DoFoundChecks(s, {}, 1, false);
     }
 };
+// regex tests
