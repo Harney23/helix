@@ -2,7 +2,7 @@
   {
     "instance_id": "handshake",
     "task_title": "handshake",
-    "problem_statement": "Add support for regex search to Windows Terminal and conhost. Introduce a SearchFlag enum with None, CaseInsensitive, and RegularExpression values. Update Search::Reset() and Search::IsStale() to accept SearchFlag instead of bool caseInsensitive.",
+    "problem_statement": "Add support for regex search to Windows Terminal and conhost.",
     "problem_statement_variant": "Implement regex search support in the Terminal search functionality.",
     "hints": "Add a SearchFlag enum to src/buffer/out/search.h. Update Search class methods to use SearchFlag instead of bool caseInsensitive.",
     "repo": "handshake",
