@@ -403,8 +403,7 @@
                       ItemClick="_listItemClicked"
                       ItemsSource="{x:Bind FilteredActions}"
                       SelectionChanged="_listItemSelectionChanged"
-                      SelectionMode="Single"
-                      Style="{StaticResource NoAnimationsPlease}" />
+                      SelectionMode="Single" />
 
         </Grid>
 
