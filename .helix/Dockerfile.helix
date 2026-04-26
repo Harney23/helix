@@ -2,4 +2,4 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0
 WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates && rm -rf /var/lib/apt/lists/*
 COPY . .
-CMD ["sh", "-c", "grep -q 'SearchFlag' src/buffer/out/search.h && echo 'PASS' || (echo 'FAIL' && exit 1)"]
+CMD ["sh", "-c", "grep -q 'RegularExpression' src/buffer/out/search.h && echo 'PASS' || (echo 'FAIL' && exit 1)"]
