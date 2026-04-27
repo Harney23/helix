@@ -1,23 +1,9 @@
 [
   {
-    "instance_id": "handshake",
-    "task_title": "handshake",
-    "problem_statement": "Add support for regex search to Windows Terminal and conhost. Introduce a SearchFlag enum with None, CaseInsensitive, and RegularExpression values. Update Search::Reset() and Search::IsStale() to accept SearchFlag instead of bool caseInsensitive.",
-    "problem_statement_variant": "Implement regex search support in the Terminal search functionality.",
-    "hints": "Add a SearchFlag enum to src/buffer/out/search.h. Update Search class methods to use SearchFlag instead of bool caseInsensitive.",
-    "repo": "handshake",
-    "repo_path_or_url": "handshake",
+    "problem_statement": "Windows Terminal and conhost search supports literal text matching, but it does not support regular expression matching. Add regex search support while preserving the existing literal, case-sensitive, and case-insensitive search behavior.",
+    "problem_statement_variant": "Implement regex search support in the terminal search flow. Regex matching should only be used when the regex search option is selected.",
+    "hints": "Focus on the search flag flow through TerminalControl and conhost search. The relevant implementation paths include src/cascadia/TerminalControl, src/host, src/interactivity/win32, src/renderer, and src/types.",
     "FAIL_TO_PASS": "src/host/ut_host/SearchTests.cpp",
-    "PASS_TO_PASS": "src/buffer/out/ut_textbuffer/UTextAdapterTests.cpp",
-    "language": "handshake",
-    "docker_file": "handshake",
-    "run_script": "handshake",
-    "task_type": "handshake",
-    "task_category": "handshake",
-    "repo_category": "handshake",
-    "version": "handshake",
-    "container_mem": "handshake",
-    "container_memswap": "handshake",
-    "container_network_needed": "handshake"
+    "PASS_TO_PASS": "src/buffer/out/ut_textbuffer/UTextAdapterTests.cpp"
   }
 ]
